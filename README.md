@@ -5,7 +5,7 @@
 Add script to your document:
 
 ```html
-  <script type="text/javascript" src="browser-image-preloader/index.js"></script>
+<script type="text/javascript" src="browser-image-preloader/index.js"></script>
 ```
 
 ## usage
@@ -13,19 +13,19 @@ Add script to your document:
 Preload images:
 
 ```js
-  browserImagePreloader('path/to/image1.png', 'path/to/image2.png', 'path/to/image3.png').load();
+browserImagePreloader('path/to/image1.png', 'path/to/image2.png', 'path/to/image3.png').load();
 ```
 
 Add handlers:
 
 ```js
-  browserImagePreloader('path/to/image1.png', 'path/to/image2.png', 'path/to/image3.png')
-  .loaded( function (img, percent) {
-    console.log(img.src, 'loaded at', percent);
-  })
-  .done( function () {
-    console.log('finished loading images');
-  }).load();
+browserImagePreloader('path/to/image1.png', 'path/to/image2.png', 'path/to/image3.png')
+.loaded( function (img, percent) {
+  console.log(img.src, 'loaded at', percent);
+})
+.done( function () {
+  console.log('finished loading images');
+}).load();
 ```
 
 ## notes
@@ -33,5 +33,5 @@ Add handlers:
 We can treat `browser-image-preloader` as a [CommonJS](https://webpack.github.io/docs/commonjs.html) module if using something like [Browserify](http://browserify.org/):
 
 ```js
-  var preloader = require('browser-image-preloader');
+var preloader = require('browser-image-preloader');
 ```
