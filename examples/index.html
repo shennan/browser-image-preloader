@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Browser Image Preloader</title>
+	<script type="text/javascript" src="../index.js"></script>
+	<style type="text/css">
+
+		h1 { font-family: "Trebuchet MS", Helvetica, sans-serif; color: #959595; }
+
+		img { display: block; margin-bottom: .5em; }
+
+	</style>
+</head>
+
+<body>
+
+	<h1>Browser Image Preloader</h1>
+
+	<script type="text/javascript">
+
+		browserImagePreloader(
+
+			"http://placehold.it/400x300&text=image1",
+			"http://placehold.it/400x300&text=image2",
+			"http://placehold.it/400x300&text=image3",
+			"http://placehold.it/400x300&text=image4"
+
+		)
+		.loaded( function (img, percent) {
+			
+			console.log('percentage complete:', percent);
+
+			document.body.appendChild(img);
+
+		})
+		.done( function () {
+
+			console.log('done');
+
+		})
+		.timeout(function(){
+
+			console.log('timed out');
+
+		}, 5000)
+		.load();
+
+	</script>
+</body>
+</html>
