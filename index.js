@@ -20,9 +20,9 @@
       throw Error('BrowserImagePreloader: cannot find the Image object');
 
     var self = this;
-    var timeout = 10000;
+    var duration = 10000;
     var count = urls.length;
-    var fallback = setTimeout(done, timeout);
+    var time, useTimeout;
 
     self.done = function (cb) {
 
@@ -42,9 +42,33 @@
 
     }
 
+    self.timeout = function (cb, dur) {
+
+      if (typeof cb == 'function')
+        timeout = cb,
+        useTimeout = true;
+
+      if (!isNaN(dur))
+        duration = dur;
+
+      return self;
+
+    }
+
     self.load = load;
 
     function load () {
+
+      if (useTimeout) {
+
+        time = setTimeout(function () {
+
+          timeout();
+
+          time = undefined;
+
+        }, duration);
+      }
 
       for(var i = 0; i < urls.length; i++){
 
@@ -60,7 +84,9 @@
             
             loaded(img, percent);
 
-            if(count < 1){
+            if(count < 1 && (time || !useTimeout)){
+
+              clearTimeout(time);
               
               done();
 
@@ -83,6 +109,8 @@
     function done () {}
 
     function loaded () {}
+
+    function timeout () {}
 
     return self;
 
